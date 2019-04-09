@@ -4,8 +4,16 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
-// Connect to database
+const userAuthRoutes = require('./routes/api/userAuthRoutes');
+const expensesRoutes = require('./routes/api/expensesRoutes');
+
+//Body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Connect to Mongo database
 mongoose
   .connect(
     `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@${
@@ -25,6 +33,6 @@ mongoose
     }
   );
 
-app.get('/api', (req, res) => {
-  res.send('Hello from the server side!!!!!');
-});
+// Use Routes
+app.use('/api/users', userAuthRoutes);
+app.use('/api/expenses', expensesRoutes);
