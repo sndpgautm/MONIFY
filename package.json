@@ -4,9 +4,11 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "server.js",
   "scripts": {
-    "client": "cd client && npm start",
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
     "server": "nodemon -r dotenv/config server.js",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "client": "npm start --prefix client",
+    "dev": "concurrently --kill-others \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,6 @@
     "mongoose": "^5.5.0"
   },
   "devDependencies": {
-    "concurrently": "^4.0.1"
+    "concurrently": "^4.1.0"
   }
 }

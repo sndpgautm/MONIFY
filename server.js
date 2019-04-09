@@ -1,3 +1,5 @@
+'use strict';
+
 require('dotenv').config();
 const express = require('express');
 const app = express();
@@ -24,5 +26,5 @@ mongoose
   );
 
 app.get('/api', (req, res) => {
-  res.send('Hello from the server side');
+  res.send('Hello from the server side!!!!!');
 });
