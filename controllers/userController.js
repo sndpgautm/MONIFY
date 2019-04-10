@@ -78,3 +78,12 @@ exports.user_login_get = (req, res) => {
     });
   });
 };
+
+// Handle current user info on GET
+exports.user_current_get = (req, res) => {
+  res.json({
+    id: req.user.id,
+    name: req.user.name,
+    email: req.user.email
+  });
+};
