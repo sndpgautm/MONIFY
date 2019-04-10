@@ -7,13 +7,25 @@ const gravatar = require('gravatar');
 // Load User model
 const User = require('../models/User');
 
+// Load Input Validation
+const validateRegisterInput = require('../validation/register');
+const validateLoginInput = require('../validation/login');
+
 // Handle User Create on POST
 exports.user_create_post = (req, res) => {
+  const { errors, isValid } = validateRegisterInput.validateRegisterInput(
+    req.body
+  );
+  // Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
   User.findOne({ email: req.body.email })
     .exec()
     .then(user => {
       if (user) {
-        return res.status(400).json({ email: 'Email already exists' });
+        errors.email = 'Email already exists';
+        return res.status(400).json(errors);
       } else {
         const avatar = gravatar.url(req.body.email, {
           s: '200', // Size
@@ -47,13 +59,20 @@ exports.user_create_post = (req, res) => {
 
 // Handle User Login on GET
 exports.user_login_get = (req, res) => {
+  const { errors, isValid } = validateLoginInput.validateLoginInput(req.body);
+  // Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const email = req.body.email;
   const password = req.body.password;
   // Find user by email
   User.findOne({ email: email }).then(user => {
     // Check for user
     if (!user) {
-      return res.status(404).json({ email: 'User not found' });
+      errors.email = 'User not found';
+      return res.status(404).json(errors);
     }
     // Check Password
     bcrypt.compare(password, user.password).then(isMatch => {
@@ -73,7 +92,8 @@ exports.user_login_get = (req, res) => {
           }
         );
       } else {
-        return res.status(400).json({ password: 'Password Incorrect' });
+        errors.password = 'Password incorrect';
+        return res.status(400).json(errors);
       }
     });
   });
