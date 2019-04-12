@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const gravatar = require('gravatar');
 
-// Load User model
+// Load User Model
 const User = require('../models/User');
 
 // Load Input Validation
@@ -18,6 +18,7 @@ exports.user_create_post = (req, res) => {
   );
   // Check Validation
   if (!isValid) {
+    // If any errors, send 400 with errors object
     return res.status(400).json(errors);
   }
   User.findOne({ email: req.body.email })
