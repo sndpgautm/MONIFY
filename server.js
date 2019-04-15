@@ -20,7 +20,7 @@ mongoose
     `mongodb://${process.env.DB_USER}:${process.env.DB_PWD}@${
       process.env.DB_HOST
     }:${process.env.DB_PORT}/test`,
-    { useNewUrlParser: true, useCreateIndex: true }
+    { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false }
   )
   .then(
     () => {
