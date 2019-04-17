@@ -1,5 +1,3 @@
-'use strict';
-
 // Global function for checking null, undefined, empty object and empty
 
 const isEmpty = value =>
@@ -8,4 +6,4 @@ const isEmpty = value =>
   (typeof value === 'object' && Object.keys(value).length === 0) ||
   (typeof value === 'string' && value.trim().length === 0);
 
-module.exports = isEmpty;
+export default isEmpty;
