@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
+import { clearCurrentExpenses } from '../../actions/expenseActions';
 
 class Navbar extends Component {
   onLogoutClick = e => {
     e.preventDefault(); // Prevents default href redirect to "/" page to call logoutUser action from authActions
+    this.props.clearCurrentExpenses();
     this.props.logoutUser();
   };
 
@@ -88,5 +90,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { logoutUser, clearCurrentExpenses }
 )(Navbar);
