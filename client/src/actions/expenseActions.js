@@ -3,7 +3,6 @@ import axios from 'axios';
 import {
   GET_EXPENSES,
   EXPENSES_LOADING,
-  GET_ERRORS,
   CLEAR_CURRENT_EXPENSES
 } from './types';
 
