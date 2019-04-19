@@ -11,28 +11,31 @@ const Currency = mongoose.Types.Currency;
 const getAmount = amt => (amt / 100).toFixed(2);
 
 // Create Schema
-const ExpenseSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'users'
+const ExpenseSchema = new Schema(
+  {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'users'
+    },
+    category: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String
+    },
+    amount: {
+      type: Currency,
+      required: true,
+      get: getAmount
+    },
+    date: {
+      type: Date,
+      //required: true,
+      default: Date.now
+    }
   },
-  category: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String
-  },
-  amount: {
-    type: Currency,
-    required: true,
-    get: getAmount
-  },
-  date: {
-    type: Date,
-    //required: true,
-    default: Date.now
-  }
-});
+  { toJSON: { getters: true } }
+);
 
 module.exports = mongoose.model('expense', ExpenseSchema);

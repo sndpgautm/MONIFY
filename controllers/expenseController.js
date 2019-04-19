@@ -48,8 +48,7 @@ exports.expense_create_post = (req, res) => {
   });
 
   newExpense.save().then(expense => {
-    console.log(expense.amount);
-    // Need to fix amount on client side (amount/100).toFixed(2) for original format eg. $120.50
+    // Need to fix amount on client side from string to Number format eg. "120.50" to 120.50 for chartjs calculations
     res.json(expense);
   });
 };

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentExpenses } from '../../actions/expenseActions';
+import ExpenseFeed from '../expenses/ExpenseFeed';
 import Spinner from '../common/Spinner';
 
 class Dashboard extends Component {
@@ -20,7 +21,12 @@ class Dashboard extends Component {
     } else {
       // Check if logged in user has expenses data
       if (expenses.length > 0) {
-        dashboardContent = <h4>TODO: DISPLAY EXPENSES</h4>;
+        dashboardContent = (
+          <div>
+            <h4>TODO: DISPLAY EXPENSES</h4>
+            <ExpenseFeed expenses={expenses} />
+          </div>
+        );
       } else {
         // User is logged in but has no expenses
         dashboardContent = (

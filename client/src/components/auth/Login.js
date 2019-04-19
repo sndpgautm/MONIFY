@@ -49,7 +49,7 @@ class Login extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Log In</h1>
               <p className="lead text-center">Sign in to your Monify account</p>
-              <form onSubmit={this.onSubmit}>
+              <form onSubmit={this.onSubmit.bind(this)}>
                 <TextFieldGroup
                   placeholder="Email Address"
                   name="email"

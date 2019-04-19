@@ -2,9 +2,29 @@ import axios from 'axios';
 
 import {
   GET_EXPENSES,
+  ADD_EXPENSE,
+  GET_ERRORS,
   EXPENSES_LOADING,
   CLEAR_CURRENT_EXPENSES
 } from './types';
+
+// Add Expense
+export const addExpense = expenseData => dispatch => {
+  axios
+    .post('/api/expenses', expenseData)
+    .then(res =>
+      dispatch({
+        type: ADD_EXPENSE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 
 // Get current expenses
 export const getCurrentExpenses = () => dispatch => {
