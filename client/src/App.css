@@ -2,6 +2,10 @@ img {
   width: 100%;
 }
 
+.navbar-brand {
+  font-size: 24px;
+}
+
 .landing {
   position: relative;
   background: url('./img/showcase.jpg') no-repeat;

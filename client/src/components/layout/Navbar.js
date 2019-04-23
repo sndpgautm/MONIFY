@@ -18,8 +18,13 @@ class Navbar extends Component {
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
+          <Link to="/add-expense" className="nav-link">
+            <i className="fas fa-plus" /> Add
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link to="/expenses" className="nav-link">
-            Expenses
+            My Expenses
           </Link>
         </li>
         <li className="nav-item">
@@ -74,13 +79,6 @@ class Navbar extends Component {
           </button>
 
           <div className="collapse navbar-collapse" id="mobile-nav">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link to="/about" className="nav-link">
-                  <i className="fas fa-question" /> About
-                </Link>
-              </li>
-            </ul>
             {isAuthenticated ? authLinks : guestLinks}
           </div>
         </div>

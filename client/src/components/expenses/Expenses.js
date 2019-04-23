@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import AddExpense from './AddExpense';
 import ExpenseFeed from './ExpenseFeed';
 import Spinner from '../common/Spinner';
 import { getCurrentExpenses } from '../../actions/expenseActions';
@@ -24,10 +23,7 @@ class Expenses extends Component {
       <div className="feed">
         <div className="container">
           <div className="row">
-            <div className="col-md-12">
-              <AddExpense />
-              {expenseContent}
-            </div>
+            <div className="col-md-12">{expenseContent}</div>
           </div>
         </div>
       </div>

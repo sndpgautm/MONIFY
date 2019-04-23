@@ -23,7 +23,6 @@ class Dashboard extends Component {
       if (expenses.length > 0) {
         dashboardContent = (
           <div>
-            <h4>TODO: DISPLAY EXPENSES</h4>
             <ExpenseFeed expenses={expenses} />
           </div>
         );
@@ -47,9 +46,12 @@ class Dashboard extends Component {
       <div className="dashboard">
         <div className="container">
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-7">
               <h1 className="display-4">Dashboard</h1>
               {dashboardContent}
+            </div>
+            <div className="col-md-5">
+              <h1>ToDo: ChartJS</h1>
             </div>
           </div>
         </div>
