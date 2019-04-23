@@ -5,7 +5,8 @@ import {
   ADD_EXPENSE,
   GET_ERRORS,
   EXPENSES_LOADING,
-  CLEAR_CURRENT_EXPENSES
+  CLEAR_CURRENT_EXPENSES,
+  DELETE_EXPENSE
 } from './types';
 
 // Add Expense
@@ -16,6 +17,24 @@ export const addExpense = expenseData => dispatch => {
       dispatch({
         type: ADD_EXPENSE,
         payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Delete expense
+export const deleteExpense = id => dispatch => {
+  axios
+    .delete(`/api/expenses/${id}`)
+    .then(res =>
+      dispatch({
+        type: DELETE_EXPENSE,
+        payload: id
       })
     )
     .catch(err =>

@@ -2,7 +2,8 @@ import {
   GET_EXPENSES,
   ADD_EXPENSE,
   EXPENSES_LOADING,
-  CLEAR_CURRENT_EXPENSES
+  CLEAR_CURRENT_EXPENSES,
+  DELETE_EXPENSE
 } from '../actions/types';
 
 const initialState = {
@@ -33,6 +34,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         expenses: null
+      };
+    case DELETE_EXPENSE:
+      return {
+        ...state,
+        expenses: state.expenses.filter(
+          expense => expense._id !== action.payload
+        )
       };
     default:
       return state;

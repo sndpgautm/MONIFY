@@ -51,7 +51,7 @@ class Dashboard extends Component {
               {dashboardContent}
             </div>
             <div className="col-md-5">
-              <h1>ToDo: ChartJS</h1>
+              <h1 className="display-4">ToDo:Chartjs</h1>
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@ const passport = require('passport');
 const userAuthRoutes = require('./routes/api/userAuthRoutes');
 const expensesRoutes = require('./routes/api/expensesRoutes');
 
-//Body parser middleware
+// Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
