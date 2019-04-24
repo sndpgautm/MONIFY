@@ -3,7 +3,9 @@ import {
   ADD_EXPENSE,
   EXPENSES_LOADING,
   CLEAR_CURRENT_EXPENSES,
-  DELETE_EXPENSE
+  DELETE_EXPENSE,
+  GET_EXPENSE_BY_ID,
+  UPDATE_EXPENSE
 } from '../actions/types';
 
 const initialState = {
@@ -29,6 +31,21 @@ export default function(state = initialState, action) {
         ...state,
         expenses: action.payload,
         loading: false
+      };
+    case GET_EXPENSE_BY_ID:
+      return {
+        ...state,
+        expense: action.payload
+      };
+    case UPDATE_EXPENSE:
+      return {
+        ...state,
+        expense: {},
+        expenses: state.expenses.map(expense =>
+          expense.id === action.payload.id
+            ? (expense = action.payload)
+            : expense
+        )
       };
     case CLEAR_CURRENT_EXPENSES:
       return {

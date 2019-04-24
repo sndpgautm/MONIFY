@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
@@ -31,7 +32,7 @@ class AddExpense extends Component {
       description: this.state.description
     };
 
-    this.props.addExpense(newExpense);
+    this.props.addExpense(newExpense, this.props.history);
 
     // Clear State
     this.setState({
@@ -45,7 +46,7 @@ class AddExpense extends Component {
     const { errors } = this.state;
     // Select options for category
     const options = [
-      { label: '* Select Expense Category', value: 0 },
+      { label: '* Select Expense Category', value: '' },
       { label: 'Food & Drinks', value: 'Food & Drinks' },
       { label: 'Shopping', value: 'Shopping' },
       { label: 'Housing', value: 'Housing' },
@@ -109,4 +110,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { addExpense }
-)(AddExpense);
+)(withRouter(AddExpense));

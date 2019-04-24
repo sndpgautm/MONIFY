@@ -6,11 +6,14 @@ import {
   GET_ERRORS,
   EXPENSES_LOADING,
   CLEAR_CURRENT_EXPENSES,
-  DELETE_EXPENSE
+  DELETE_EXPENSE,
+  GET_EXPENSE_BY_ID,
+  UPDATE_EXPENSE,
+  CLEAR_ERRORS
 } from './types';
 
 // Add Expense
-export const addExpense = expenseData => dispatch => {
+export const addExpense = (expenseData, history) => dispatch => {
   axios
     .post('/api/expenses', expenseData)
     .then(res =>
@@ -19,6 +22,28 @@ export const addExpense = expenseData => dispatch => {
         payload: res.data
       })
     )
+    .then(res => dispatch({ type: CLEAR_ERRORS }))
+    .then(res => history.push('/expenses'))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Update Expense
+export const updateExpense = (expenseData, id, history) => dispatch => {
+  axios
+    .post(`/api/expenses/${id}`, expenseData)
+    .then(res =>
+      dispatch({
+        type: UPDATE_EXPENSE,
+        payload: res.data
+      })
+    )
+    .then(res => dispatch({ type: CLEAR_ERRORS }))
+    .then(res => history.push('/expenses'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -45,7 +70,7 @@ export const deleteExpense = id => dispatch => {
     );
 };
 
-// Get current expenses
+// Get current expenses of current user
 export const getCurrentExpenses = () => dispatch => {
   dispatch(setExpensesLoading());
   axios
@@ -60,6 +85,24 @@ export const getCurrentExpenses = () => dispatch => {
       dispatch({
         type: GET_EXPENSES,
         payload: []
+      })
+    );
+};
+
+// Get current expense data by id
+export const getCurrentExpenseById = id => dispatch => {
+  axios
+    .get(`/api/expenses/${id}`)
+    .then(res =>
+      dispatch({
+        type: GET_EXPENSE_BY_ID,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_EXPENSE_BY_ID,
+        payload: {}
       })
     );
 };

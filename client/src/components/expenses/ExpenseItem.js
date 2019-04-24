@@ -26,7 +26,7 @@ class ExpenseItem extends Component {
           >
             <i className="fas fa-times" />
           </button>
-          <Link to={`expense/edit/${expense._id}`}>
+          <Link to={`/edit-expense/${expense._id}`}>
             <button
               type="button"
               className="btn btn-primary mr-1"

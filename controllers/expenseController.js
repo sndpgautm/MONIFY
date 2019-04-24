@@ -67,8 +67,8 @@ exports.expense_update_post = (req, res) => {
     user: req.user.id,
     category: req.body.category,
     description: req.body.description,
-    amount: req.body.amount,
-    date: req.body.date
+    amount: req.body.amount
+    //date: req.body.date
   };
 
   Expense.findOneAndUpdate(

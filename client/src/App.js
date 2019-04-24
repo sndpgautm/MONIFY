@@ -18,6 +18,7 @@ import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Expenses from './components/expenses/Expenses';
 import AddExpense from './components/expenses/AddExpense';
+import EditExpense from './components/expenses/EditExpense';
 
 import './App.css';
 
@@ -64,6 +65,13 @@ class App extends Component {
                   exact
                   path="/add-expense"
                   component={AddExpense}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/edit-expense/:id"
+                  component={EditExpense}
                 />
               </Switch>
             </div>

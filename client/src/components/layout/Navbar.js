@@ -34,7 +34,7 @@ class Navbar extends Component {
         </li>
         {/*<span class="navbar-text">{user.name}</span>*/}
         <li className="nav-item">
-          <a href="/" onClick={this.onLogoutClick} className="nav-link">
+          <a href="/nolink" onClick={this.onLogoutClick} className="nav-link">
             <img
               className="rounded-circle"
               src={user.avatar}
