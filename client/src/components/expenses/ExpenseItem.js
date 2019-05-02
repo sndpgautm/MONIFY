@@ -43,7 +43,7 @@ class ExpenseItem extends Component {
               <h3 className="text-left lead">{expense.category}</h3>
             </div>
             <div className="col-md-8">
-              <h3 className="text-left lead">Details</h3>
+              {/*<h3 className="text-left lead">Details</h3>*/}
               <p className="card-text">{expense.description}</p>
             </div>
           </div>

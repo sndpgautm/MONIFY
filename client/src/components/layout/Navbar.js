@@ -19,7 +19,7 @@ class Navbar extends Component {
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link to="/add-expense" className="nav-link">
-            <i className="fas fa-plus" /> Add
+            Add
           </Link>
         </li>
         <li className="nav-item">
@@ -34,7 +34,7 @@ class Navbar extends Component {
         </li>
         {/*<span class="navbar-text">{user.name}</span>*/}
         <li className="nav-item">
-          <a href="/nolink" onClick={this.onLogoutClick} className="nav-link">
+          <a href="/" onClick={this.onLogoutClick} className="nav-link">
             <img
               className="rounded-circle"
               src={user.avatar}
@@ -89,6 +89,7 @@ class Navbar extends Component {
 
 Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
+  clearCurrentExpenses: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 

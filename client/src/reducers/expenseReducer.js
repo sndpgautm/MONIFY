@@ -5,13 +5,15 @@ import {
   CLEAR_CURRENT_EXPENSES,
   DELETE_EXPENSE,
   GET_EXPENSE_BY_ID,
-  UPDATE_EXPENSE
+  UPDATE_EXPENSE,
+  UPDATE_CHART
 } from '../actions/types';
 
 const initialState = {
   expense: {},
   expenses: null,
-  loading: false
+  loading: false,
+  expensesByCategory: null
 };
 
 export default function(state = initialState, action) {
@@ -58,6 +60,11 @@ export default function(state = initialState, action) {
         expenses: state.expenses.filter(
           expense => expense._id !== action.payload
         )
+      };
+    case UPDATE_CHART:
+      return {
+        ...state,
+        expensesByCategory: action.payload
       };
     default:
       return state;

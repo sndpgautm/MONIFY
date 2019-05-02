@@ -25,6 +25,10 @@ class EditExpense extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+
     if (nextProps.expense.expense) {
       const expense = nextProps.expense.expense;
       // Set component fields state
@@ -33,9 +37,6 @@ class EditExpense extends Component {
         amount: expense.amount,
         description: expense.description
       });
-    }
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
     }
   }
 

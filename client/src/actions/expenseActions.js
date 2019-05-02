@@ -9,7 +9,8 @@ import {
   DELETE_EXPENSE,
   GET_EXPENSE_BY_ID,
   UPDATE_EXPENSE,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  UPDATE_CHART
 } from './types';
 
 // Add Expense
@@ -23,7 +24,7 @@ export const addExpense = (expenseData, history) => dispatch => {
       })
     )
     .then(res => dispatch({ type: CLEAR_ERRORS }))
-    .then(res => history.push('/expenses'))
+    .then(res => history.push('/dashboard'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -43,7 +44,7 @@ export const updateExpense = (expenseData, id, history) => dispatch => {
       })
     )
     .then(res => dispatch({ type: CLEAR_ERRORS }))
-    .then(res => history.push('/expenses'))
+    .then(res => history.push('/dashboard'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -68,6 +69,10 @@ export const deleteExpense = id => dispatch => {
         payload: err.response.data
       })
     );
+  // Call update chart after few sec to reload chart data if delete action is successful
+  setTimeout(() => {
+    dispatch(reqForChartData());
+  }, 100);
 };
 
 // Get current expenses of current user
@@ -107,6 +112,18 @@ export const getCurrentExpenseById = id => dispatch => {
     );
 };
 
+export const reqForChartData = () => dispatch => {
+  axios
+    .get('/api/expenses')
+    .then(res =>
+      dispatch({
+        type: UPDATE_CHART,
+        payload: calculateChartData(res.data)
+      })
+    )
+    .catch(err => console.log(err));
+};
+
 // Expenses loading
 export const setExpensesLoading = () => {
   return {
@@ -119,4 +136,29 @@ export const clearCurrentExpenses = () => {
   return {
     type: CLEAR_CURRENT_EXPENSES
   };
+};
+
+// Calculate  array of expenses by categories for chart data
+export const calculateChartData = expenses => {
+  const Food = sumByCategories(expenses, 'Food & Drinks');
+  const Shopping = sumByCategories(expenses, 'Shopping');
+  const Housing = sumByCategories(expenses, 'Housing');
+  const Transportation = sumByCategories(expenses, 'Transportation');
+  const Leisure = sumByCategories(expenses, 'Leisure');
+  const Others = sumByCategories(expenses, 'Others');
+  return [Food, Shopping, Housing, Transportation, Leisure, Others];
+};
+
+// Calculate total sum of expenses by category
+export const sumByCategories = (expenses, category) => {
+  if (expenses) {
+    let sum = 0;
+    const filteredExpenses = expenses.filter(
+      expense => expense.category === category
+    );
+    filteredExpenses.forEach(expense => {
+      sum = sum + Number(expense.amount);
+    });
+    return sum;
+  }
 };
