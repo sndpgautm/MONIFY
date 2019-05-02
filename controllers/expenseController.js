@@ -13,6 +13,8 @@ const validateExpenseInput = require('../validation/expense');
 // Return List of all Expenses
 exports.expense_list_all = (req, res) => {
   Expense.find()
+    .where('user')
+    .equals(req.user.id)
     .sort({ date: -1 })
     .then(expenses => res.json(expenses))
     .catch(err =>
