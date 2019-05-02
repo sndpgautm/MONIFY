@@ -6,6 +6,13 @@ img {
   font-size: 24px;
 }
 
+.chart {
+  margin-right: auto;
+  margin-left: auto;
+  width: 380px;
+  height: 480px;
+}
+
 .landing {
   position: relative;
   background: url('./img/showcase.jpg') no-repeat;

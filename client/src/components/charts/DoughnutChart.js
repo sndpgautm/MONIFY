@@ -47,6 +47,8 @@ class DoughnutChart extends Component {
                 }
               ]
             },
+            responsive: true,
+            maintainAspectRatio: false,
             title: {
               display: this.props.displayTitle,
               text: 'Total Expenses',
