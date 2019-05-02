@@ -15,6 +15,9 @@ const expensesRoutes = require('./routes/api/expensesRoutes');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+//For jelastic ssl use
+app.enable('trust proxy');
+
 // Connect to Mongo database
 mongoose
   .connect(
@@ -53,3 +56,15 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
+
+//For local dev disable https conenction
+//Only enable when delpolying to git and jelastic
+app.use((req, res, next) => {
+  if (req.secure) {
+    // request was via https, so do no special handling
+    next();
+  } else {
+    // request was via http, so redirect to https
+    res.redirect('https://' + req.headers.host + req.url);
+  }
+});
