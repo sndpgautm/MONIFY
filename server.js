@@ -44,19 +44,6 @@ app.use(passport.initialize());
 // Passport Config
 require('./config/passport')(passport);
 
-// Use Routes
-app.use('/api/users', userAuthRoutes);
-app.use('/api/expenses', expensesRoutes);
-
-// Serve static assets in production
-if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static('client/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
-
 //For local dev disable https conenction
 //Only enable when delpolying to git and jelastic
 app.use((req, res, next) => {
@@ -67,4 +54,15 @@ app.use((req, res, next) => {
     // request was via http, so redirect to https
     res.redirect('https://' + req.headers.host + req.url);
   }
+});
+
+// Use Routes
+app.use('/api/users', userAuthRoutes);
+app.use('/api/expenses', expensesRoutes);
+
+// Serve static assets in production
+// Set static folder
+app.use(express.static('client/build'));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
