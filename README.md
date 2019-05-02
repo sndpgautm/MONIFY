@@ -6,7 +6,7 @@ Live Demo: https://monify.jelastic.metropolia.fi/
 
 * Users can: 
   - Sign Up and Login
-  - To get the avatar (profile imamge), user need to have a [Gravatar](https://en.gravatar.com/)
+  - To get the avatar (profile imamge), User need to use a [Gravatar](https://en.gravatar.com/) email
   - Add, Update and Delete expense data
   - View chart or graphical representation of their total expenses
   
