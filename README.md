@@ -23,6 +23,7 @@ Live Demo: https://monify.jelastic.metropolia.fi/
 
 
 ### APIDoc
+LINK: https://documenter.getpostman.com/view/7437779/S1Lu19Bm
 
 #### User
 * `'/api/users/register' - POST` - Register user
