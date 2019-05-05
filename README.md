@@ -1,4 +1,4 @@
-# Moniy
+# Monify
 
 An application to manage you expenses
 
